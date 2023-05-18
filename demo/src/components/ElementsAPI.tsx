@@ -6,12 +6,18 @@ import React, { useContext } from 'react';
 
 import { GlobalContext } from '../context';
 
+function urlWithCorsProxy(url: string): string {
+  const cors = new URL('https://cors-anywhere-ybtjbo45iq-uc.a.run.app');
+  cors.searchParams.set('u', url);
+  return cors.href;
+}
+
 export const ElementsAPI: React.FC = () => {
   const { apiDescriptionUrl } = useContext(GlobalContext);
 
   const specUrlWithProxy =
-    apiDescriptionUrl && window.location.origin === 'https://elements-demo.stoplight.io'
-      ? `https://stoplight.io/cors-proxy/${apiDescriptionUrl}`
+    apiDescriptionUrl && window.location.origin === 'https://taichunmin.idv.tw'
+      ? urlWithCorsProxy(apiDescriptionUrl)
       : apiDescriptionUrl;
 
   return (
